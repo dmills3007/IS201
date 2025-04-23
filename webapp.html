@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #score, #guesses {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between 1 and 25</p>
+        <input type="number" id="guessInput" min="1" max="25">
+        <button onclick="makeGuess()">Submit Guess</button>
+        <div id="message"></div>
+        <div id="score">Score: 0</div>
+        <div id="guesses">Guesses Left: 3</div>
+        <button onclick="resetGame()" style="display: none;" id="resetButton">Play Again</button>
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 25) + 1;
+        let score = 0;
+        let guessesLeft = 3;
+        const message = document.getElementById('message');
+        const scoreDisplay = document.getElementById('score');
+        const guessesDisplay = document.getElementById('guesses');
+        const resetButton = document.getElementById('resetButton');
+        const guessInput = document.getElementById('guessInput');
+
+        function makeGuess() {
+            const guess = parseInt(guessInput.value);
+            if (isNaN(guess) || guess < 1 || guess > 25) {
+                message.textContent = 'Please enter a number between 1 and 25';
+                return;
+            }
+
+            guessesLeft--;
+            guessesDisplay.textContent = `Guesses Left: ${guessesLeft}`;
+
+            if (guess === targetNumber) {
+                message.textContent = 'Congratulations! You guessed correctly!';
+                score += guessesLeft + 1;
+                scoreDisplay.textContent = `Score: ${score}`;
+                endGame(true);
+            } else {
+                message.textContent = guess < targetNumber ? 'Too low!' : 'Too high!';
+                if (guessesLeft === 0) {
+                    message.textContent = `Game Over! The number was ${targetNumber}.`;
+                    endGame(false);
+                }
+            }
+            guessInput.value = '';
+        }
+
+        function endGame(won) {
+            guessInput.disabled = true;
+            document.querySelector('button[onclick="makeGuess()"]').disabled = true;
+            resetButton.style.display = 'block';
+        }
+
+        function resetGame() {
+            targetNumber = Math.floor(Math.random() * 25) + 1;
+            guessesLeft = 3;
+            message.textContent = '';
+            guessesDisplay.textContent = `Guesses Left: ${guessesLeft}`;
+            guessInput.disabled = false;
+            document.querySelector('button[onclick="makeGuess()"]').disabled = false;
+            resetButton.style.display = 'none';
+            guessInput.value = '';
+        }
+    </script>
+</body>
+</html>

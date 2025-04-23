@@ -1,0 +1,55 @@
+.header {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    color: rgba(101, 47, 8, 0.904);
+}
+
+.violin{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: lighter;
+    list-style-position: outside;
+    padding-left: 0%;
+    margin: 0 auto;
+    display: table;
+    color: rgb(209, 207, 156);
+}
+
+body{
+    background-image: url(../assets/img/Violin.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed
+}
+
+footer{
+    background-color: rgba(0, 0, 0, 0.179);
+    color: whitesmoke;
+    position: fixed;
+    bottom: 0px;
+    left: 1px;
+    right: 1px;
+    height: 25px;
+    padding-top: 9px;
+    text-align: center;
+}
+
+.align{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.vi2{
+    font-size: 12px;
+}
+
+.vi3 {
+    border: 5px solid black;
+    margin: 10%;
+    background-color: rgba(128, 128, 128, 0.748);
+    padding: 2%;
+}
